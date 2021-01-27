@@ -1,0 +1,21 @@
+{% extends 'aniCategory/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+  {% block title%}  
+  Ani-Category
+  {%endblock%}
+
+  {%block content %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/base.css'%}" type='text/css'> 
+  
+  <div class="search_results">
+    <span class ='text-info fw-bold fs-4 display-5 font-arial text-center my-4 d-block'> Login Part Here</span>
+    <div class="spinner-border text-info" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+  {%endblock%}
+      <!--JS HERE-->
+   

@@ -1,0 +1,26 @@
+body::-webkit-scrollbar{
+ width:0 !important;
+} 
+.scroll-y::-webkit-scrollbar{
+    width: 0 !important;
+}
+.search_results {
+    margin-left:10%; 
+    margin-right:10%;
+}
+.image-info{
+    position:relative;
+}
+.bottom-ani-rate {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: 
+}
+
+@media screen and (max-width: 415px ){
+    .search_results {
+        margin-left:3%;
+        margin-right:3%;
+    }
+}

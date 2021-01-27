@@ -1,0 +1,63 @@
+{% if results %}
+            <div class="row">
+              {% for result in results %}
+              
+                  <div class="card p-sm-1 p-md-2 p-lg-3 mx-auto my-1 overflow-auto scroll-y border-0 bg-light " style="width:18rem; max-height:500px;">
+                    <a href=" {{ result.url }}">
+                      <div class = 'image-info' >
+                    <img class="border-0 card-img-top mh-50 overflow-lg-hidden  rounded" src="{{ result.image_url }}" alt="{{ result.title }}" title='{{ result.image_url }}'>
+                    <p class = 'bottom-ani-rate'> 
+                  {% if result.recommedation_count %}
+                   {{ result.recommendation_count }}
+                  {% elif result.score %}
+                    {{ result.score }}
+                  {%else%}
+                     No ratings yet!
+                  {%endif%}
+                  </p>
+                  </div>
+
+                    </a>
+                
+                    <div class="card-body">
+                     <h5 class="card-title bg-secondary text-white fw-normal fs-5 text-center py-2 rounded">{{ result.title }}</h5>
+                    {% if result.synopsis %}
+                    <p class="card-text">{{ result.synopsis }}</p>
+                    {%endif%}
+                    </div>
+                    <ul class ='list-group list-group-flush'>
+                      <li class ='list-group-item bg-light'> <span class ='text-warning fw-bold fs-5' >
+                        {% if result.type %}
+                        {{result.type}} 
+                        {%else%}
+                        {{ result.recommendation_count }}
+                        
+                        {%endif%}
+                      </span>  
+                        {% if result.recommendation_count %}
+                        Users recommeded
+                        {% elif result.score == None %}
+                      
+                        {%else%}
+                        {{result.score}} ratings.
+                        {%endif%}
+                        
+                      </li>
+                      {%if result.source %}
+                      <li class ='list-group-item mb-2'> Adapted from : <span class = 'text-success fw-bold fs-5'> 
+                        {{ result.source }}
+                      </span>  </li>
+                      {%endif%}
+                    </ul>
+                   
+          </div>
+          {%endfor%}
+         </div>
+           
+              
+{%else%}
+ <div class = 'jumbotron' > 
+   <h3 class ='display-5 text-mute text-info text-center mx-auto my-3'>No results found</h3>
+ </div>
+{%endif%}
+
