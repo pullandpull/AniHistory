@@ -9,4 +9,7 @@ urlpatterns = [
     path('search/',views.anime_search, name = 'anime_search'),
     path('archive/',views.show_archive , name = 'show_archive'),
     path('recommended/',views.show_recommended , name ='show_recommeded'),
+    path('register/',views.register, name = 'register'),
+    path('login/',views.user_login, name = 'login'), 
+    path('logout/',views.user_logout, name = 'logout')
 ]

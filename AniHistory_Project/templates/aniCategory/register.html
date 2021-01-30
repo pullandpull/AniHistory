@@ -1,0 +1,24 @@
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+{% if register_stat %}
+    <p class = 'display-5 text-center' >Thank you for registering! <a href = '#' class = 'display-5 text-center '>Login</p>
+{%else%}
+
+
+<div class = 'form-register rounded'>
+    <div class = 'jumbotron'>
+        <h3 class = 'display-5 text-info rounded text-center py-3 fw-normal'> Register </h3>
+    </div>
+<form action="{%url 'register' %} " method= 'post'>
+    {% csrf_token %}
+    {% bootstrap_form user_form %}
+    {% buttons %}
+    <button btn-submit= 'submit' class ='btn btn-success p-2  m-2 ' type="submit" >Register</button>
+    {%endbuttons%}
+</form>
+</div>
+
+{%endif%}

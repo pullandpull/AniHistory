@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse 
+from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required as lr
+
+
+#Model // form imports 
+from aniCategory.forms import UserForm,UserLoginForm
 
 #global imports
 import json
@@ -14,6 +20,54 @@ from pprint import pprint
 def index(request):
     
     return render(request,'aniCategory/index.html',{})
+
+def user_login(request): 
+    context_dict = {}
+    
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username = username, password = password)
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect(reverse('index'))
+            else: 
+                context_dict['stats'] = 'Account is Disabled'
+        else:
+            context_dict['stats'] = 'Incorrect Username or Password'
+    else: 
+        context_dict['user_login_form'] = UserLoginForm()
+    
+    return render(request,'aniCategory/login.html',context_dict)
+    
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+
+
+def register(request):
+    context_dict = {}
+    register_stat = False 
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        
+        if user_form.is_valid(): 
+            user = user_form.save(commit = True)
+            user.set_password(user.password)
+            user.save()
+            register_stat = True
+            return HttpResponseRedirect(reverse('index'))
+        else: 
+            print(user_form.errors)
+    else: 
+        user_form = UserForm()
+
+    context_dict['user_form'] = user_form
+    context_dict['register_stat'] = register_stat
+
+    return render(request,'aniCategory/register.html',context_dict)
+            
 
 def anime_search(request):
     endpoint = r'https://api.jikan.moe/v3'
