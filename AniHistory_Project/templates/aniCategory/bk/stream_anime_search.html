@@ -1,0 +1,51 @@
+{% load static %}
+
+<script>
+  $('[data-toggle="tooltipTrigger"]').tooltip({
+    trigger: 'hover'
+  });
+</script>
+<!-- edited part -->
+<!-- fock notes hahahaha -->
+<!-- lmao hahaha -->
+{% if animes %}
+<div class="row">
+  {% for anime in animes %} 
+  <div class="card p-sm-1 p-md-2 p-lg-3 mx-auto my-1 scroll-y border-0"
+    style="width:18rem;">
+    <div class = 'image-div' data-toggle='
+    {% if anime.description %}
+    {{ anime.description|truncatewords:50}}
+    {%else%}
+    {{ anime.title }}
+    {%endif%}'> 
+        <!-- 1/29/2020 edited part -->
+        <img class="border-0 card-img-top tooltipCheck image-info" src="{{ anime.cover }}"
+          alt="{{ anime.title }}"   
+          />
+          
+          <form action="{% url 'stream_anime' %}" method = 'POST' >
+            {%csrf_token%}
+        <span class = 'bottom-right-ani-type'>
+          <button class = 'btn btn-success btn-md btn-reference' name = 'watch' type= 'submit' value = '{{ anime.vid_id }}'>Watch</button>
+        </span>
+        <span class = 'top-right-ani-source'>
+          <button class ='btn btn-primary btn-md btn-reference' name = 'download' type= 'submit' value = '{{ anime.vid_id }}'>Download</button>
+        </span>
+      </form>
+
+  </div>
+
+
+    <div class="card-body">
+      <h5 class="card-title fs-5 text-center pb-2 rounded">{{ anime.title }}</h5>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+{%else%}
+<div class='jumbotron'>
+  <h3 class='display-5 text-mute text-info text-center mx-auto my-3'>No results found</h3>
+</div>
+{%endif%}

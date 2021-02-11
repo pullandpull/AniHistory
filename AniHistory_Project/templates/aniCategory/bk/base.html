@@ -74,11 +74,11 @@
 
 
         <div class='d-flex ms-auto my-sm-2'>
-          <input type="text" name="search" id='search' class='form-control me-2' placeholder='MyAnimeList Search'
+          <input type="text" name="search" id='search' class='form-control me-2' placeholder='Search'
             aria-label='Search' required="required">
           <button type="submit" id='submit' class='btn btn-success btn-md-1 btn-sm-2 m-sm-2' name="submit"
             value='submit'>
-          Search</button>
+            Search</button>
         </div>
 
       </div>
@@ -87,22 +87,9 @@
 
   </nav>
 
-  
-<div class="search_results container">
-  
-<form class="input-group mb-3 " action="{%url 'stream_anime_search' %}" method = 'GET' >
-  {%csrf_token%}
-  <input id= 'anime_Search' type="text" name = 'search_anime' placeholder ='Search&Watch Anime' class = 'form-control me-2 rounded' aria-describedby="basic-addon2">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-      </svg></button>
-    </div>
-  </form>
-  
   {%block content%}
   {%endblock%}
-</div>
+
   <!--JS HERE-->
 
   <script src='{% static "js/ani-search_ajax.js" %}'></script>

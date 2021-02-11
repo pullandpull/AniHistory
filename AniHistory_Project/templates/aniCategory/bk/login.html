@@ -15,7 +15,7 @@
 <p class = 'display-5 text-center' >{{ user_stats }}</p>
 {%endif%}
 
-<div class = 'form-register form-login rounded py-lg-3 mb-lg-3'>
+<div class = 'form-register form-login rounded'>
 <div class ='jumbotron'>
     <h3 class ='display-5 text-info ms-auto text-center rounded '> Login </h3>
 </div>
@@ -28,6 +28,12 @@
     {%endbuttons%}
 </form>
 <span  class ='ml-2 text-mute fs-4 fw-normal'>Need account?, <a  class ='text-info fs-4 fw-normal text-decoration-none' href="{%url 'register'%}" data-register = 'register'>Register!</a></span>
+</div>
+
+<div class="search_results container">
+  <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
 </div>
 
 {%endblock%}

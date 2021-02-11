@@ -38,6 +38,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'registration',
     'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -79,7 +80,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'AniHistory_Project.wsgi.application'
 
-
+#authentication backends 
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -108,6 +110,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 
 
 # Internationalization
