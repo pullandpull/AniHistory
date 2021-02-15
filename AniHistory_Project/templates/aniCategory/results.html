@@ -1,7 +1,5 @@
 {% load static %}
 {% load bootstrap4 %}
-  <!-- Scripts-->
-
 
 {% if animes %}
   {% for anime in animes %} 
@@ -11,15 +9,15 @@
     {% if anime.description %}
     {{ anime.description|truncatewords:50}}
     {%else%}
-    {{ anime.title }}
+    {{ anime.clean_title }}
     {%endif%}'> 
         <!-- 1/29/2020 edited part -->
-        <img class="border-0 card-img-top tooltipCheck image-info" src="{{ anime.cover }}"
-          alt="{{ anime.title }}"   
+        <img class="border-0 card-img-top tooltipCheck image-info" src="{{ anime.anime_cover }}"
+          alt="{{ anime.clean_title }}"   
           />
         {%if user.is_authenticated %}
-        <img class= 'btn-trigger' data-name= '{{anime.title}}' data-id = '{{user.id}}' data-vid-id = {{anime.vid_id}} data-cover = '{{anime.cover}}' src=' 
-         {% if anime.title in bookmarks %}
+        <img class= 'btn-trigger' data-name= '{{anime.anime_title}}' data-id = '{{user.id}}' data-vid-id = {{anime.anime_vid_id}} data-cover = '{{anime.anime_cover}}' src=' 
+         {% if anime.anime_title in check_list %}
             {%static "images/heart_selected.png"%}
           {%else%}
             {%static "images/heart_default.png"%}
@@ -31,27 +29,25 @@
           <form action="{% url 'stream_anime_by_id' %}" method = 'POST' >
             {%csrf_token%}
         <span class = 'bottom-right-ani-type'>
-          <button class = 'btn btn-success btn-md btn-reference' name = 'watch' type= 'submit' value = '{{ anime.vid_id }}'>Watch</button>
+          <button class = 'btn btn-success btn-md btn-reference' name = 'watch' type= 'submit' value = '{{ anime.anime_vid_id }}'>Watch</button>
         </span>
         <span class = 'top-right-ani-source'>
-          <button class ='btn btn-primary btn-md btn-reference' name = 'download' type= 'submit' value = '{{ anime.vid_id }}'>Download</button>
+          <button class ='btn btn-primary btn-md btn-reference' name = 'download' type= 'submit' value = '{{ anime.anime_vid_id }}'>Download</button>
         </span>
       </form>
   </div>
 
 <!--Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>  -->
     <div class="card-body">
-      <h5 class="card-title fs-5 text-center pb-2 rounded">{{ anime.title }}</h5>
+      <h5 class="card-title fs-5 text-center pb-2 rounded">{{ anime.clean_title }}</h5>
     </div>
   </div>
   {%endfor%}
-</div>
 
 {%else%}
 <div class='jumbotron'>
-  <h3 class='display-5 text-mute text-info text-center mx-auto my-3'>No results found</h3>
+  <h3 class='display-5 text-mute text-info text-center mx-auto my-3'>No Bookmarks Found!</h3>
 </div>
 {%endif%}
-
 
 <script src='{% static "js/ani-search_ajax.js" %}'></script>

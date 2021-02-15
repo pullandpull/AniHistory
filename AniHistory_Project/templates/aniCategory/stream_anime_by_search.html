@@ -1,27 +1,8 @@
-{%extends 'aniCategory/base.html'%}
 {% load static %}
 {% load bootstrap4 %}
+  <!-- Scripts-->
 
-{%block title%}
-Stream Search
-{%endblock%}
-
-
-{%block content%}
-
-<!-- remove
-<script>
-  $('[data-toggle="tooltipTrigger"]').tooltip({
-    trigger: 'hover'
-  });
-</script>
-<!-- edited part -->
-<!-- fock notes hahahaha -->
-<!-- lmao hahaha -->
 {% if animes %}
- 
-
-<div class="row">
   {% for anime in animes %} 
   <div class="card p-sm-1 p-md-2 p-lg-3 mx-auto my-1 scroll-y border-0"
     style="width:18rem;">
@@ -35,12 +16,17 @@ Stream Search
         <img class="border-0 card-img-top tooltipCheck image-info" src="{{ anime.cover }}"
           alt="{{ anime.title }}"   
           />
-          
-          {%if user.is_authenticated %}
-          <button id = "bookmark" data-name= '{{anime.title}}' data-id = '{{user.id}}' data-vid-id = {{anime.vid_id}} data-cover = '{{anime.cover}}' >
-          <img src="{%static 'images/heart_default.png'%}" alt="Bookmark">
-          </button>
+        {%if user.is_authenticated %}
+        <img class= 'btn-trigger' data-name= '{{anime.title}}' data-id = '{{user.id}}' data-vid-id = {{anime.vid_id}} data-cover = '{{anime.cover}}' src=' 
+         {% if anime.title in bookmarks %}
+            {%static "images/heart_selected.png"%}
+          {%else%}
+            {%static "images/heart_default.png"%}
           {%endif%}
+          'alt="bookmarks">
+        <!-- </button> -->
+        {%endif%}
+          
           <form action="{% url 'stream_anime_by_id' %}" method = 'POST' >
             {%csrf_token%}
         <span class = 'bottom-right-ani-type'>
@@ -58,7 +44,6 @@ Stream Search
     </div>
   </div>
   {%endfor%}
-</div>
 
 {%else%}
 <div class='jumbotron'>
@@ -66,4 +51,4 @@ Stream Search
 </div>
 {%endif%}
 
-{%endblock%}
+<script src='{% static "js/ani-search_ajax.js" %}'></script>

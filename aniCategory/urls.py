@@ -20,4 +20,7 @@ urlpatterns = [
     path('stream/anime/latest/', views.stream_anime_latest, name = 'stream_anime_latest'),
     path('stream/anime/bookmark/',views.add_bookmark, name = 'add_bookmark'),
     path('stream/anime/id/<path:video_id>/',views.stream_anime_by_link, name = 'stream_anime_by_link'),
+
+    path('account/anime/bookmarks/', views.get_anime_bookmarks, name = 'my_bookmarks'),
+    path('account/anime/bookmarks/search/',views.find_by_name, name = 'find_by_anime'),
 ]

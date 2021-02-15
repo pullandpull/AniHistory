@@ -4,7 +4,6 @@ from django.urls import reverse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required as lr
 from django.contrib.auth.models import User
-
 from aniCategory.models import Anime_Bookmarks
 
 #Model // form imports 
@@ -44,7 +43,7 @@ def user_login(request):
     context_dict['login_form'] = user_login_form 
 
     return render(request, 'aniCategory/login.html', context_dict )
-                    
+                 
         
     
 def user_logout(request):
@@ -150,8 +149,8 @@ def show_anime_info(request):
             try:
                 response = requests.get(endpoint + '/' + mal_id )
                 response.raise_for_status()
-                json_data = json_loads(response.text)
-                pprint(json_data)
+                json_data = json.loads(response.text)
+                
 
             except Exception as err:
                 print(err)
@@ -169,10 +168,15 @@ def get_key():
 #Bookmark views
 #Title rename
 def re_title(title = None): 
-    reg_title_obj = re.compile(r'episode \d+?', re.I)
+    reg_title_obj = re.compile(r'\s?episode\s?\d+', re.I)
     res_title = reg_title_obj.sub(r'',title)
     return res_title
 
+def re_vid_id(vid_id = None):
+    reg_compile = re.compile(r'\-?episode\-?\d+', re.I )
+    re_id = reg_compile.sub('-episode-1',vid_id)
+    return re_id
+    
 #Show bookmarks
 def show_bookmarks(user = None):
     bookmarks = Anime_Bookmarks.objects.filter(user = user)
@@ -184,18 +188,16 @@ def get_bookmarks(user = None):
     for anime in bookmarks:
         bookmarks_list.append(anime.anime_title)
 
-    print(bookmarks_list)
-    
     return bookmarks_list
-
+    
+@lr
 def add_bookmark(request): 
-
     if request.method == 'GET': 
         anime_name = request.GET.get('anime_name',None)
         re_anime_title = re_title(anime_name)
-        print(re_anime_title)
         anime_cover = request.GET.get('anime_cover',None)
         anime_vid_id = request.GET.get('anime_video_id',None)
+        anime_vid_id = re_vid_id(anime_vid_id)
         user_id = request.GET.get('user_id',None)
 
         if request.user.id == int(user_id):
@@ -205,33 +207,80 @@ def add_bookmark(request):
             anime_vid_id = anime_vid_id,
             user = request.user
             )
-            if stats == True: 
+            print(stats)
+            if stats: 
                 bookmark.save()
                 status = 'True'
                 print('Added')
 
-            elif stats == False:
+            else:
                 bookmark.delete()
                 status = 'False'
                 print('Deleted')
-
-            else: 
-                pass
-                print('passed')
 
         else: 
             raise Exception('Invalid')
 
     return HttpResponse(status)
 
+@lr
+def get_anime_bookmarks(request):
+    context_dict = {} 
+    current_user = request.user
+    if request.user.is_authenticated:
+        bookmarks = show_bookmarks(current_user)
+        my_list = get_bookmarks(current_user)
+    else: 
+        bookmarks = None
+        my_list = None
+
+    context_dict['bookmarks'] = bookmarks
+    context_dict['check_list'] = my_list
+
+    return render(request,'aniCategory/my_bookmarks.html',context_dict)
+
+@lr
+def find_by_name(request): 
+    context_dict = {}
+    current_user = request.user
+    if request.method == 'POST': 
+        query = request.POST.get('anime_name')
+        print(query)
+        if query: 
+            try: 
+                Ani_results = Anime_Bookmarks.objects.filter(anime_title__icontains = query)
+                my_list = get_bookmarks(current_user)
+            except Anime_Bookmarks.DoesNotExist:
+                Ani_results = None
+                my_list = None
+        elif len(query) < 1:
+                Ani_results = Anime_Bookmarks.objects.filter(anime_title__icontains = query)
+                my_list = get_bookmarks(current_user)
+        else: 
+            pass
+
+    context_dict['animes'] = Ani_results
+    context_dict['check_list'] = my_list
+    
+    print(context_dict)
+
+    return render(request,'aniCategory/results.html',context_dict)
+
+
 def stream_anime_search(request): 
-
+    current_user = request.user
     endpoint = r'https://simpleanime.p.rapidapi.com/anime/search/'
-
+    endpoint_bk = r'https://simpleanime.p.rapidapi.com/anime/list/recent' 
+    
+    if request.user.is_authenticated: 
+         my_list = get_bookmarks(current_user)
+    else:
+        my_list = None
+        
     key = get_key()
 
-    if request.method == 'GET':
-        query = request.GET.get('search_anime', None)
+    if request.method == 'POST':
+        query = request.POST.get('search_anime', None)
         context_dict = {}
         if key:    
             headers = {
@@ -241,15 +290,20 @@ def stream_anime_search(request):
         else: 
             print('Key not found ')
 
-        if not query == None: 
+        if not query == '': 
             response = requests.get(endpoint + query , headers = headers )
             response.raise_for_status()
             json_data = json.loads(response.text)
-            context_dict['animes'] = json_data['data']
-            pprint(context_dict['animes'])
-            
-        else:
+           
+        elif len(query) < 1: 
+            response = requests.get(endpoint_bk, headers = headers)
+            response.raise_for_status()
+            json_data = json.loads(response.text)
+
+        else: 
             pass
+    context_dict['animes'] = json_data['data']
+    context_dict['bookmarks'] = my_list
     
     return render(request,'aniCategory/stream_anime_by_search.html', context_dict)
 
@@ -262,8 +316,6 @@ def stream_anime_latest(request):
         context_dict['bookmarks'] = get_bookmarks(request.user)
     else:
         context_dict['bookmarks'] = None
-
-    print(context_dict['bookmarks'])
 
     if request.method == 'GET': 
         if key: 
@@ -304,7 +356,7 @@ def stream_anime_by_id(request):
                 json_data = json.loads(response.text)
                 context_dict['data'] = json_data['data'][0]
                 context_dict['episodes'] = json_data['episode']
-                pprint(json_data)
+               
 
             else:
                 print('Key not found')
@@ -331,7 +383,7 @@ def stream_anime_by_link(request,video_id):
             response = requests.get(endpoint + video_id , headers = headers)
             response.raise_for_status()
             json_data = json.loads(response.text)
-            pprint(json_data)
+          
             context_dict['data'] = json_data['data'][0]
             context_dict['episodes'] = json_data['episode']
 

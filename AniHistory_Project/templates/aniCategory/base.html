@@ -9,6 +9,8 @@
   <link rel="icon" href="{%static 'images/favicon_v3.ico'%}">
   <title>AniHistory - {%block title %}Home{%endblock%}</title>
   <!-- CSS-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/base.css'%}" type='text/css'>
@@ -27,9 +29,8 @@
       <a href="{%url 'index'%}" class='navbar-brand mx-lg-3 text-white fw-normal '>
         <img src="{% static 'images/favicon_v3.ico'%} " alt="icon" style='border-radius:5px' class='mh-25 mw-25'>
         AniHistory</a>
-      <button class="navbar-toggler bg-secondary mx-1" type="button" data-bs-toggle="collapse"
-        data-bs-target=".sidebar" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
+      <button class="navbar-toggler bg-secondary mx-1" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -47,8 +48,8 @@
               <li><a class="dropdown-item" value_id='winter' href="#Winter">Winter</a></li>
             </ul>
           </li>
-          <li class ='nav-item'>
-            <input type="text" id='year' class ='form-control my-auto inputYear' placeholder ='Year' />
+          <li class='nav-item'>
+            <input type="text" id='year' class='form-control my-auto inputYear' placeholder='Year' />
           </li>
           <li class="nav-item">
             <a href='#Recommendations' value_id='recommendations'
@@ -57,17 +58,20 @@
           <li class="nav-item">
             <a href="#News" value_id='news' class='nav-link text-light fs-5 fw-normal request-type'>News</a>
           </li>
-          
-          <li class= 'nav-item' >
-            <a href="#stream/anime" class ='nav-link text-light fs-5 fw-normal' data-request = 'stream'>Stream Latest Animes</a>
+
+          <li class='nav-item'>
+            <a href="#stream/anime" class='nav-link text-light fs-5 fw-normal' data-request='stream'>Stream Latest
+              Animes</a>
           </li>
 
           {% if user.is_authenticated %}
-            <li class ='nav-item'> 
-              <span class = ' nav-link text-light fs-5 fw-normal'>{{user.get_username}}<a href="{% url 'logout' %}" class= 'text-warning text-decoration-none'  data-login = "logout"> Logout </a></span> 
-          {%else%}
-          <li class = 'nav-item'>
-            <a  class ='nav-link text-light fs-5 fw-normal' href="{%url 'login' %}" data-register = 'login'>Login</a>
+          <li class='nav-item'>
+            <span class=' nav-link text-light fs-5 fw-normal'><a href="{%url 'my_bookmarks' %}"
+                class='text-decoration-none'>{{user.get_username}}</a><a href="{% url 'logout' %}"
+                class='text-warning text-decoration-none' data-login="logout"> Logout </a></span>
+            {%else%}
+          <li class='nav-item'>
+            <a class='nav-link text-light fs-5 fw-normal' href="{%url 'login' %}" data-register='login'>Login</a>
           </li>
           {%endif%}
         </ul>
@@ -78,7 +82,7 @@
             aria-label='Search' required="required">
           <button type="submit" id='submit' class='btn btn-success btn-md-1 btn-sm-2 m-sm-2' name="submit"
             value='submit'>
-          Search</button>
+            Search</button>
         </div>
 
       </div>
@@ -87,22 +91,28 @@
 
   </nav>
 
-  
-<div class="search_results container">
-  
-<form class="input-group mb-3 " action="{%url 'stream_anime_search' %}" method = 'GET' >
-  {%csrf_token%}
-  <input id= 'anime_Search' type="text" name = 'search_anime' placeholder ='Search&Watch Anime' class = 'form-control me-2 rounded' aria-describedby="basic-addon2">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-      </svg></button>
-    </div>
+
+  <div class="search_results container">
+
+  {%block intro%}
+    <form class="input-group mb-3 " action="." method="POST">
+      {%csrf_token%}
+      <i class="fa fa-search icon"></i>
+      <input id='anime_Search' type="text" name='search_anime' placeholder='Search...' class='form-control me-2 rounded'
+        aria-describedby="basic-addon2">
   </form>
-  
+  {%endblock%}
+
+  {%block results%}
+  <div class = 'row'>
+    
+  </div>
+  {%endblock%}
+
   {%block content%}
   {%endblock%}
-</div>
+
+ </div>
   <!--JS HERE-->
 
   <script src='{% static "js/ani-search_ajax.js" %}'></script>
