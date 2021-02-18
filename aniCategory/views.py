@@ -18,6 +18,8 @@ import requests
 from pprint import pprint
 
 # Create your views here.
+def error404(request,exception): 
+    return render(request,'aniCategory/404.html', status = 404)
 
 def index(request):
     
@@ -161,7 +163,7 @@ def show_anime_info(request):
 
 #Streaming anime API part
 def get_key():
-    with open('id.key') as key_obj:
+    with open('id_2.key') as key_obj:
         key = key_obj.read()
     return key
 
