@@ -307,9 +307,9 @@ img {
         height: 50%;
     }
 
-    .image-info{
+    .card img:hover {
         max-width:91%;
-        max-height:202px;
+        max-height:205px;
     }
 
     .fs-5 {

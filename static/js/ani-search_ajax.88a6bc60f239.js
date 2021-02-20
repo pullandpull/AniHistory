@@ -113,7 +113,7 @@ $(document).ready(function () {
 
   $('.filter-option').click(function(){
     by_value = $(this).attr('value_id');
-    $.get('/aniHistory/account/anime/bookmarks/filter/',{
+    $.get('/aniHistory/account/anime/bookmars/filter/',{
       filter_by: by_value
     },
     function(response){

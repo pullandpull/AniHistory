@@ -1,0 +1,15 @@
+{% extends 'aniCategory/base.html'%}
+{% load static %}
+{% load bootstrap4 %}
+
+{%block title %}
+    Error 404
+{%endblock%}
+
+
+{%block content %}
+    <div class ='jumbotron '>
+        <h2 class = 'display-5 text-danger  text-center mx-auto my-3'> Server Error </h2>
+        <img  class = 'mx-auto d-block p-3' src="{%static 'images/anime_not_found.gif' %}" alt="page_not_found">
+    </div>
+{%endblock%}

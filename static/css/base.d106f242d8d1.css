@@ -307,15 +307,6 @@ img {
         height: 50%;
     }
 
-    .image-info{
-        max-width:91%;
-        max-height:202px;
-    }
-
-    .fs-5 {
-        font-size: 0.8rem !important;
-    }
-
     .image-div {
         max-height: 200px;
         max-width: 150px;
@@ -328,13 +319,11 @@ img {
     }
 
     .btn-reference {
-        padding: 0px;
+        padding:0px;
     }
-
-    .bottom-right-ani-type {
-        bottom: 27%;
+    .bottom-right-ani-type{
+        bottom:27%;
     }
-
 
 
 }

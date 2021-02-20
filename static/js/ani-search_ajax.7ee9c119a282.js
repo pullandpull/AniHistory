@@ -34,7 +34,7 @@ $(document).ready(function () {
     });
   });
   //season filter 
-  $('.filter-by-season').click(function () {
+  $('.dropdown-item').click(function () {
     var season_value = $(this).attr('value_id');
     var season_year = $('#year').val();
 
@@ -108,16 +108,6 @@ $(document).ready(function () {
         // handle returned data
         $('.row-results').html(response);
       }
-    });
-  });
-
-  $('.filter-option').click(function(){
-    by_value = $(this).attr('value_id');
-    $.get('/aniHistory/account/anime/bookmarks/filter/',{
-      filter_by: by_value
-    },
-    function(response){
-      $('.row-results').html(response);
     });
   });
 });

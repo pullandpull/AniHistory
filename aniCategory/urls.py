@@ -23,4 +23,5 @@ urlpatterns = [
 
     path('account/anime/bookmarks/', views.get_anime_bookmarks, name = 'my_bookmarks'),
     path('account/anime/bookmarks/search/',views.find_by_name, name = 'find_by_anime'),
+    path('account/anime/bookmarks/filter/',views.filter_bookmarks, name = 'filter_my_bookmarks'),
 ]

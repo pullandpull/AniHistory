@@ -17,14 +17,11 @@ body {
     background-color: rgba(1, 5, 35, 1);
     width: 100%;
 }
-
-#not-found {
-    display: block;
+#not-found{
+    display:block;
 }
-
-#not-found h2,
-img {
-    margin: 0 auto !important;
+#not-found h2,img{
+    margin:0 auto !important;
 }
 
 .rounded {
@@ -136,7 +133,7 @@ img {
 
 .icon {
     padding: 10px;
-    background: inherit;
+    background:inherit;
     color: white;
     min-width: 30px;
     border-radius: 10px 0px 0px 10px !important;
@@ -251,7 +248,6 @@ img {
         margin-left: 3%;
         margin-right: 3%;
     }
-
     .form-register {
         width: 80%;
         margin: 10%;
@@ -300,41 +296,16 @@ img {
         width: inherit;
         --bs-gutter-x: 0;
     }
-
-    .card:nth-child(2n+1),
-    .card:nth-child(2n+2) {
-        flex: 50%;
-        height: 50%;
+    .card:nth-child(2n+1), .card:nth-child(2n+2){
+        flex:50%;
+        height:50%;
     }
-
-    .image-info{
-        max-width:91%;
-        max-height:202px;
+    .img-div{
+        max-height:200px;
+        max-width:150px;
     }
-
-    .fs-5 {
-        font-size: 0.8rem !important;
+    .img-info{
+        width: 150px;
+        height: 200px;
     }
-
-    .image-div {
-        max-height: 200px;
-        max-width: 150px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .image-info {
-        height: inherit;
-    }
-
-    .btn-reference {
-        padding: 0px;
-    }
-
-    .bottom-right-ani-type {
-        bottom: 27%;
-    }
-
-
-
 }
