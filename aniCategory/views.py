@@ -114,10 +114,15 @@ def show_archive(request):
         season = request.GET['season']
         year = request.GET['year']
         if season and year:
-            response = requests.get(endpoint + str(year) + '/' + season)
-            response.raise_for_status()
-            json_data = json.loads(response.text)
-            context_dict['results'] = json_data['anime']
+            try:
+                response = requests.get(endpoint + str(year) + '/' + season)
+                response.raise_for_status()
+                json_data = json.loads(response.text)
+            except Exception as err:
+                print(err)
+                context_dict['results'] = None
+            else:
+                context_dict['results'] = json_data['anime']
         else:
             pass
     else:
@@ -136,6 +141,8 @@ def show_recommended(request):
 
         if response.status_code == requests.codes.ok:
             json_response = json.loads(response.text)
+            pprint(json_response)
+
             if request_type == 'recommendations':
                 context_dict['results'] = json_response['recommendations']
             else:
@@ -144,7 +151,6 @@ def show_recommended(request):
             pass
     else:
         pass
-
     return render(request, 'aniCategory/search_results.html', context_dict)
 
 
