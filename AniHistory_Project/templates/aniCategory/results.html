@@ -28,11 +28,8 @@
           
           <form action="{% url 'stream_anime_by_id' %}" method = 'POST' >
             {%csrf_token%}
-        <span class = 'bottom-right-ani-type'>
-          <button class = 'btn btn-success btn-md btn-reference' name = 'watch' type= 'submit' value = '{{ anime.anime_vid_id }}'>Watch</button>
-        </span>
         <span class = 'top-right-ani-source'>
-          <button class ='btn btn-primary btn-md btn-reference' name = 'download' type= 'submit' value = '{{ anime.anime_vid_id }}'>Download</button>
+          <button class = 'btn btn-success btn-md btn-reference' name = 'watch' type= 'submit' value = '{{ anime.anime_vid_id }}'>Watch</button>
         </span>
       </form>
   </div>
