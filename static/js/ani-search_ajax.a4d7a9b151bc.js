@@ -50,7 +50,7 @@ $(document).ready(function () {
     }, function (data) {
       
       $('.loader-wrapper').fadeOut('fast');
-      $('.row').html(data);
+      $('.search_results').html(data);
     });
   });
 
@@ -61,8 +61,8 @@ $(document).ready(function () {
     $.get('/aniHistory/recommended/', {
       session_request: request_type
     }, function (data) {
-      $('.loader-wrapper').fadeOut("fast");
-      $('.row').html(data);
+      $('loader-wrapper').fadeOut("fast");
+      $('.search_results').html(data);
     });
   });
 

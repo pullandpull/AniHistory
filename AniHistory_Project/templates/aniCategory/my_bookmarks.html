@@ -8,18 +8,37 @@ My Bookmarks
 {%endblock%}
 
 {%block intro%}
-<form  class="input-group mb-3 " action="." method='POST'>
+<form class="input-group mb-3 " action="." method='POST'>
   {%csrf_token%}
   <input type="text" class='form-control me-2 rounded' id='input-search' placeholder='Find by Name'>
   <button class='btn btn-success btn-md-1' id='btn-submit'>Search</button>
 </form>
+
+<div class='container ml-3'>
+  <div class='row'>
+    <ul class='nav'>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-light fs-5 fw-normal " href="#" id="navbarDarkDropdownMenuLink"
+          role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter by
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+          <li><a class="dropdown-item filter-option" value_id='by_name' href="#by_name">Name</a></li>
+          <li><a class="dropdown-item filter-option" value_id = 'by_episode' href="#by_episode">Episodes</a></li>
+        </ul>
+      </li>
+    </ul>
+    </li>
+    </ul>
+  </div>
+</div>
 {%endblock%}
 {%block results%}
 {%endblock%}
 {%block content%}
 
 {% if bookmarks %}
-<div class="row">
+<div class="row row-results">
   {% for anime in bookmarks %}
   <div class="card p-sm-1 p-md-2 p-lg-3 mx-auto my-1 scroll-y border-0" style="width:18rem;">
     <div class='image-div' data-toggle='
@@ -67,6 +86,7 @@ My Bookmarks
 {%else%}
 <div class='jumbotron'>
   <h3 class='display-5 text-mute text-info text-center mx-auto my-3'>No Bookmarks Found!</h3>
+  <img class='mx-auto d-block p-3' src="{%static 'images/anime_not_found.gif' %}" alt="page_not_found">
 </div>
 {%endif%}
 {%endblock%}

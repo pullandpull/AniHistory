@@ -1,58 +1,52 @@
 {% load static %}
-<!-- 
-<script>
-  $('[data-toggle="tooltipTrigger"]').tooltip({
-    trigger: 'hover'
-  });
-</script>
- -->
-<!-- data-bs-placement='right' data-toggle= 'tooltip'-->
-<!-- fock notes hahahaha -->
-<!-- lmao hahaha -->
 {% if results %}
-<div class="row">
-  {% for result in results %} 
-  <div class="card p-sm-1 p-md-2 p-lg-3 mx-auto my-1 scroll-y border-0"
-    style="width:18rem;">
+{% for result in results %}
+<div class="card p-sm-1 p-md-2 p-lg-3 mx-auto my-1 scroll-y border-0" style="width:18rem;">
 
-    <a href=" {{ result.url }}" >  
-    <div class = 'image-div' data-toggle= '
+  <a href=" {{ result.url }}">
+    <div class='image-div' data-toggle='
     {% if result.synopsis %}
     {{ result.synopsis|truncatewords:50 }}
     {%else%}
     {{ result.title }}
     {%endif%}
-    ' > 
-        <!-- 1/29/2020 edited part -->
-        <img class="border-0 card-img-top tooltipCheck image-info" src="{{ result.image_url }}"
-          alt="{{ result.title }}"   
-          />
-        {%if result.type%}
-        <span class = 'bottom-right-ani-type'>
-          {{ result.type }}
-        </span>
-        {%endif%}
-        {% if result.source%}
-        <span class = 'top-right-ani-source'>
-          {{result.source}}
-        </span>
-        {%endif%}
-        {% if result.score %}
-        <span class = 'top-left-ani-rate'>
-          {{ result.score}}
-        </span>
-        {%endif%}
-    </a> 
-  </div>
-    <div class="card-body">
-      <h5 class="card-title fs-5 text-center pb-2 rounded">{{ result.title }}</h5>
-    </div>
-  </div>
-  {%endfor%}
+    '>
+      <!-- 1/29/2020 edited part -->
+      <img class="border-0 card-img-top tooltipCheck image-info" src="{{ result.image_url }}"
+        alt="{{ result.title }}" />
+      {% if result.recommendation_count %}
+      <span class='top-right-ani-source'>
+        {{ result.recommendation_count }} users recommend
+      </span>
+      {%endif%}
+
+      {%if result.type%}
+      <span class='bottom-right-ani-type'>
+        {{ result.type }}
+      </span>
+      {%endif%}
+      {% if result.source%}
+      <span class='top-right-ani-source'>
+        {{result.source}}
+      </span>
+      {%endif%}
+      {% if result.score %}
+      <span class='top-left-ani-rate'>
+        {{ result.score}}
+      </span>
+      {%endif%}
+  </a>
+</div>
+<div class="card-body">
+  <h5 class="card-title fs-5 text-center pb-2 rounded">{{ result.title }}</h5>
+</div>
+</div>
+{%endfor%}
 </div>
 
 {%else%}
 <div class='jumbotron'>
   <h3 class='display-5 text-mute text-info text-center mx-auto my-3'>No results found</h3>
+  <img class='mx-auto d-block p-3' src="{%static 'images/anime_not_found.gif' %}" alt="page_not_found">
 </div>
 {%endif%}

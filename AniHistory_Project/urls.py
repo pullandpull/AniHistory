@@ -14,13 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 
-#second party imports
+# second party imports
 from aniCategory import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index),
-    path('aniHistory/',include('aniCategory.urls')),
-    ]
+    path('', views.index),
+    path('aniHistory/', include('aniCategory.urls')),
+]
+
+handler404 = 'aniCategory.views.error404'
+handler500 = 'aniCategory.views.error500'

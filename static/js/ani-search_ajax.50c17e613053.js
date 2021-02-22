@@ -61,7 +61,7 @@ $(document).ready(function () {
     $.get('/aniHistory/recommended/', {
       session_request: request_type
     }, function (data) {
-      $('.loader-wrapper').fadeOut("fast");
+      $('loader-wrapper').fadeOut("fast");
       $('.row').html(data);
     });
   });
