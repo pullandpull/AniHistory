@@ -33,9 +33,15 @@ My Bookmarks
   </div>
 </div>
 {%endblock%}
+
 {%block results%}
+<div class='loader-wrapper'>
+  <span class="loader"><span class="loader-inner"></span></span>
+</div>
 {%endblock%}
+
 {%block content%}
+
 
 {% if bookmarks %}
 <div class="row row-results">

@@ -38,7 +38,7 @@
   </a>
 </div>
 <div class="card-body">
-  <h5 class="card-title fs-5 text-center pb-2 rounded">{{ result.title }}</h5>
+  <h5 class="card-title fs-6 pb-2 rounded">{{ result.title|truncatewords:8 }}</h5>
 </div>
 </div>
 {%endfor%}

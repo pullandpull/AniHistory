@@ -28,6 +28,9 @@
 
     <form action="{% url 'stream_anime_by_id' %}" method='POST'>
       {%csrf_token%}
+      
+      
+
       <span class='top-right-ani-source'>
         <button class='btn btn-success btn-md btn-reference' name='watch' type='submit'
           value='{{ anime.vid_id }}'>Watch</button>
@@ -37,7 +40,10 @@
 
   <!--Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>  -->
   <div class="card-body">
-    <h5 class="card-title fs-5 text-center pb-2 rounded">{{ anime.title }}</h5>
+    <h3 class="card-title fs-6 pb-2 rounded">{{ anime.title|truncatewords:9 }}</h5>
+    <p class='card-text text-light'>
+      {{ anime.date }}
+    </p>
   </div>
 </div>
 {%endfor%}

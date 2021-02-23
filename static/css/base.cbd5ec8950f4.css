@@ -33,7 +33,7 @@ img {
 
 .image-info {
     background-color: transparent;
-    border-radius: 0.5rem;
+    border-radius: 20px;
     width: 90%;
     height: 300px;
     margin: 0 auto !important;
@@ -84,7 +84,6 @@ img {
     display: block;
     padding: 5px;
     border-radius: 5px;
-    max-width: calc(80%);
 }
 
 .card img:hover {
@@ -169,8 +168,7 @@ img {
 .top-right-ani-source {
     bottom: 5%;
     left: 10%;
-    color:ghostwhite;
-    max-width: calc(80%);
+    color: lawngreen;
 }
 
 .btn-trigger {
@@ -346,7 +344,7 @@ img {
     }
 
     .btn-reference {
-        padding: 0.20rem;
+        padding: 0px;
     }
 
     .bottom-right-ani-type {

@@ -33,7 +33,7 @@ img {
 
 .image-info {
     background-color: transparent;
-    border-radius: 0.5rem;
+    border-radius: 20px;
     width: 90%;
     height: 300px;
     margin: 0 auto !important;
@@ -46,10 +46,11 @@ img {
     margin-right:auto !important
 }
 .intro-message{
-    text-align:center;
+    margin-left:auto !important;
+    margin-right:auto !important    
 }
 .intro-content{
-    text-indent:1rem;
+    margin-left:1.2rem;
 }
 .image-div {
     position: relative;
@@ -84,7 +85,6 @@ img {
     display: block;
     padding: 5px;
     border-radius: 5px;
-    max-width: calc(80%);
 }
 
 .card img:hover {
@@ -160,17 +160,10 @@ img {
     color: lavenderblush;
 }
 
-.date-added {
-    bottom: 20%;
-    left: 10%;
-    color: lavenderblush;
-    background-color: #777f8c;
-}
 .top-right-ani-source {
     bottom: 5%;
     left: 10%;
-    color:ghostwhite;
-    max-width: calc(80%);
+    color: lawngreen;
 }
 
 .btn-trigger {
@@ -346,7 +339,7 @@ img {
     }
 
     .btn-reference {
-        padding: 0.20rem;
+        padding: 0px;
     }
 
     .bottom-right-ani-type {

@@ -11,7 +11,7 @@ $(document).ready(function () {
     }, function (data) {
       
       $('.loader-wrapper').fadeOut('fast');
-      $('.search_results').html(data);
+      $('.row').html(data);
     });
   });
 
