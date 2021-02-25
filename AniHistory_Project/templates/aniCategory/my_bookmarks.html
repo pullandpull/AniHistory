@@ -25,6 +25,7 @@ My Bookmarks
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
           <li><a class="dropdown-item filter-option" value_id='by_name' href="#by_name">Name</a></li>
           <li><a class="dropdown-item filter-option" value_id = 'by_episode' href="#by_episode">Episodes</a></li>
+          <li><a class = 'dropdown-item filter-option' value_id = 'by_date' href = '#by_date'>Date</a></li>
         </ul>
       </li>
     </ul>
@@ -79,7 +80,8 @@ My Bookmarks
 
     <!--Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>  -->
     <div class="card-body">
-      <h5 class="card-title fs-5 text-center pb-2 rounded">{{ anime.clean_title }}</h5>
+      <h5 class="card-title fs-5 rounded">{{ anime.clean_title|truncatewords:8 }}</h5>
+      <p class ='card-text text-light fs-6 '>{{anime.date_added}}</p>
     </div>
   </div>
   {%endfor%}

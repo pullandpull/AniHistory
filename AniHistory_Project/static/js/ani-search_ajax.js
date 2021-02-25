@@ -9,7 +9,7 @@ $(document).ready(function () {
     $.get('/aniHistory/search/', {
       query: search
     }, function (data) {
-      
+
       $('.loader-wrapper').fadeOut('fast');
       $('.row').html(data);
     });
@@ -28,8 +28,8 @@ $(document).ready(function () {
       },
       dataType: 'html',
       success: function (response) {
-        
-      $('.loader-wrapper').fadeOut('fast');
+
+        $('.loader-wrapper').fadeOut('fast');
         $('.row').html(response);
       }
     });
@@ -48,7 +48,7 @@ $(document).ready(function () {
       season: season_value,
       year: season_year
     }, function (data) {
-      
+
       $('.loader-wrapper').fadeOut('fast');
       $('.row').html(data);
     });
@@ -84,22 +84,36 @@ $(document).ready(function () {
     const id = $(this).attr('data-id');
     const anime_vid_id = $(this).attr('data-vid-id');
     const anime_cover = $(this).attr('data-cover');
+    const token = $('input[name = "csrfmiddlewaretoken"]').val();
 
-    $.get('/aniHistory/stream/anime/bookmark/', {
+    $.ajax({
+      url: '/aniHistory/stream/anime/bookmark/',
+      type: "POST",
+      data: {
+        csrfmiddlewaretoken: token,
         anime_name: anime_title,
         user_id: id,
         anime_video_id: anime_vid_id,
         anime_cover: anime_cover
       },
-
-      function (data) {
-        if (data == 'True') {
+      dataType: 'text',
+      success: function (response) {
+        if (response == 'True') {
           btn_image.attr('src', '/static/images/heart_selected.png');
-        } else if (data == 'False') {
+        } else if (response == 'False') {
           btn_image.attr('src', '/static/images/heart_default.png');
         };
-      });
+      }
+    });
   });
+  /*
+          $.get('/aniHistory/stream/anime/bookmark/', {
+              anime_name: anime_title,
+              user_id: id,
+              anime_video_id: anime_vid_id,
+              anime_cover: anime_cover
+            },*/
+
 
   $('#input-search').keyup(function (e) {
     $('.loader-wrapper').fadeIn('slow');
@@ -116,22 +130,22 @@ $(document).ready(function () {
       dataType: "html",
       success: function (response) {
         // handle returned data
-        
-       $('.loader-wrapper').fadeOut('fast');
+
+        $('.loader-wrapper').fadeOut('fast');
         $('.row-results').html(response);
       }
     });
   });
 
-  $('.filter-option').click(function(){
+  $('.filter-option').click(function () {
     $('.loader-wrapper').fadeIn('slow');
     by_value = $(this).attr('value_id');
-    $.get('/aniHistory/account/anime/bookmarks/filter/',{
-      filter_by: by_value
-    },
-    function(response){
-      $('.loader-wrapper').fadeOut('fast');
-      $('.row-results').html(response);
-    });
+    $.get('/aniHistory/account/anime/bookmarks/filter/', {
+        filter_by: by_value
+      },
+      function (response) {
+        $('.loader-wrapper').fadeOut('fast');
+        $('.row-results').html(response);
+      });
   });
 });

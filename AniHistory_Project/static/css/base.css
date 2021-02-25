@@ -244,8 +244,6 @@ img {
 }
 
 .link-button {
-    margin: 10px;
-    padding: .625rem;
     display: inline-block;
 }
 
@@ -263,7 +261,17 @@ img {
     width: 100%;
     height: 100%;
 }
-
+.episode-wrapper{
+    display:flex;
+    flex-wrap:wrap;
+}
+.episode-wrapper a {
+    flex: 10%;
+    margin: 0.10rem;
+}
+.episode-title{
+    margin:.50rem;
+}
 @media screen and (max-width: 415px) {
     .search_results {
         margin-left: 3%;
@@ -331,9 +339,11 @@ img {
     }
 
     .fs-5 {
+        font-size: 0.9rem !important;
+    }
+    .fs-6 {
         font-size: 0.8rem !important;
     }
-
     .image-div {
         max-height: 200px;
         max-width: 150px;
@@ -352,7 +362,8 @@ img {
     .bottom-right-ani-type {
         bottom: 27%;
     }
-
-
+    .episode-wrapper a:nth-child(2n-1),.episode-wrapper a:nth-child(2n-2){
+        flex: 15%;
+    }
 
 }
