@@ -266,11 +266,7 @@ img {
     flex-wrap:wrap;
 }
 .episode-wrapper a {
-    flex: 10%;
-    margin: 0.10rem;
-}
-.episode-title{
-    margin:.50rem;
+    flex: calc(80%);
 }
 @media screen and (max-width: 415px) {
     .search_results {
@@ -362,7 +358,7 @@ img {
     .bottom-right-ani-type {
         bottom: 27%;
     }
-    .episode-wrapper a:nth-child(2n-1),.episode-wrapper a:nth-child(2n-2){
+    .episode-wrapper a:nth-child(2n-1){
         flex: 15%;
     }
 

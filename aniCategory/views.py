@@ -246,13 +246,13 @@ def filter_bookmarks(request):
 
 @lr
 def add_bookmark(request):
-    if request.method == 'GET':
-        anime_name = request.GET.get('anime_name', None)
+    if request.method == 'POST':
+        anime_name = request.POST.get('anime_name', None)
         re_anime_title = re_title(anime_name)
-        anime_cover = request.GET.get('anime_cover', None)
-        anime_vid_id = request.GET.get('anime_video_id', None)
+        anime_cover = request.POST.get('anime_cover', None)
+        anime_vid_id = request.POST.get('anime_video_id', None)
         anime_vid_id = re_vid_id(anime_vid_id)
-        user_id = request.GET.get('user_id', None)
+        user_id = request.POST.get('user_id', None)
 
         if request.user.id == int(user_id):
             bookmark, stats = Anime_Bookmarks.objects.get_or_create(anime_title=anime_name,

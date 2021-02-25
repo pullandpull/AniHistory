@@ -7,6 +7,7 @@ class Anime_Bookmarks(models.Model):
     anime_cover = models.URLField(max_length=128, null = False)
     anime_vid_id = models.SlugField(max_length=128, null = False)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
+    date_added = models.DateField(auto_now_add=True, null = False)
 
     def __str__(self):
         return self.clean_title

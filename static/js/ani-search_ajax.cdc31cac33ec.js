@@ -88,7 +88,7 @@ $(document).ready(function () {
 
     $.ajax({
       url: '/aniHistory/stream/anime/bookmark/',
-      type: "POST",
+      type: 'POST',
       data: {
         csrfmiddlewaretoken: token,
         anime_name: anime_title,
@@ -97,10 +97,10 @@ $(document).ready(function () {
         anime_cover: anime_cover
       },
       dataType: 'text',
-      success: function (response) {
-        if (response == 'True') {
+      success: function (data) {
+        if (data == 'True') {
           btn_image.attr('src', '/static/images/heart_selected.png');
-        } else if (response == 'False') {
+        } else if (data == 'False') {
           btn_image.attr('src', '/static/images/heart_default.png');
         };
       }
